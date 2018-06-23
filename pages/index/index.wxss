@@ -75,14 +75,17 @@ page{
 }
 
 .wtrimgContainer{
-  justify-content: space-between;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30%;
+  background-color: #621016;
+  
 }
 
 .wtrimg{
   width: 200rpx;
   height: 200rpx;
-  display: flex;
 }
 
 
