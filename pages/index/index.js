@@ -4,12 +4,14 @@ const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
+    /*motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo')*/
+    city:"南京",
+    wtrimg:"http://pic.caigoubao.cc/603511/%E5%B0%8F%E9%9B%A8.png"
   },
-  //事件处理函数
+  /*//事件处理函数
   bindViewTap: function() {
     wx.navigateTo({
       url: '../logs/logs'
@@ -50,5 +52,6 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
-  }
+  }*/
+
 })
