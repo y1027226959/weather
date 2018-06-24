@@ -13,12 +13,12 @@
 
   <view class='bg'>
     <view class='topBar'>
-      <navigator class='locate'>
+      <navigator class='locate' url="../index/index?city=天津" open-type="redirect" hover-class="other-navigator-hover">
         <image class='locateIcon' src='http://pic.caigoubao.cc/603511/location.png'></image>
         <!-- 颜色为#621016 -->
         <text class='locateText'>{{city}}</text>
       </navigator>
-      <navigator class='addIcon' >
+      <navigator class='addIcon' url="../index/index?city=北京" open-type="redirect" hover-class="other-navigator-hover">
         <image class='plsIcon' src='http://pic.caigoubao.cc/603511/add.png'></image>
       </navigator> 
     </view>
@@ -27,5 +27,6 @@
     </view>
   </view>
   <view class='infoList'>
+    <view class='list1'></view>
   </view>
 </view>

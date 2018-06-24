@@ -23,7 +23,7 @@ page{
 }
 
 .topBar{
-  position: relative;
+  position: absolute;
   width: 100%;
   top: 3%;
   justify-content: space-between;
@@ -67,20 +67,32 @@ page{
 
 .infoList{
   width: 100%;
-  height: 2000rpx;
+  height: 100%;
   position: absolute;
   background-color: #efefef;
-  top: 100%;
+  top: 80%;
   box-shadow: 0rpx -10rpx 15rpx #555;
+}
+
+.infoList>.list1{
+  background-color: #fff;
+  height: 20%;
+  width: 100%;
+  box-shadow: 0rpx 5rpx 10rpx #555;
 }
 
 .wtrimgContainer{
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 30%;
-  background-color: #621016;
-  
+  margin-top: 25%;
+  background-color: rgba(0, 16, 22, .3);
+  border: 2px solid #222;
+  margin-left: 225rpx;
+  margin-right: 225rpx;
+  padding-top: 50rpx;
+  padding-bottom: 50rpx;
+  border-radius: 20%;
 }
 
 .wtrimg{

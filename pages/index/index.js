@@ -1,6 +1,6 @@
-//index.js
-//获取应用实例
 const app = getApp()
+var flag=0;
+var daily = [];//长度为5的数组，存放当前城市5天的天气情况
 
 Page({
   data: {
@@ -8,52 +8,35 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')*/
-    city:"南京",
-    wtrimg:"http://pic.caigoubao.cc/603511/%E5%B0%8F%E9%9B%A8.png"
+    city:" ",
+    wtrimg:"http://pic.caigoubao.cc/603511/%E6%99%B4.png"
   },
-  /*//事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
-  onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
+  onLoad:function(options){
+    if (!options.city) { this.setData({ city: "南京" }) } else {this.setData({city: options.city})}
+
+    /**异步请求访问接口，格式化json */
+    var that=this;
+    wx.request({
+      url: 'https://api.seniverse.com/v3/weather/daily.json',
+      data: {
+        key:"galvrrn3fnjuv9lm",
+        location:that.data.city,
+        language:"zh-Hans",
+        unit:"c",
+        start:0,
+        days:5
+      },
+      header: {
+        'Content-Type': 'application/json'
+      },
+      success: function (res) {
+        console.log(res.data)
+        that.setData({
+          daily:res.data.results[0].daily
         })
       }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
-  },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
     })
-  }*/
-
-
-
+    console.log(this.data)
+    
+  },
 })

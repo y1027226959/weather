@@ -11,15 +11,19 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.1.0",
-	"appid": "touristappid",
-	"projectname": "weather",
+	"libVersion": "2.1.1",
+	"appid": "wxa2032699ba9a53be",
+	"projectname": "ruangong",
 	"condition": {
 		"search": {
 			"current": -1,
 			"list": []
 		},
 		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
 			"current": -1,
 			"list": []
 		},
