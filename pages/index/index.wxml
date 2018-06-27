@@ -11,9 +11,9 @@
     <text class="user-motto">{{motto}}</text>
   </view>-->
 
-  <view class='bg'>
+  <view class='bg' style='background-image:url("{{bg}}")'>
     <view class='topBar'>
-      <navigator class='locate' url="../index/index?city=天津" open-type="redirect" hover-class="other-navigator-hover">
+      <navigator class='locate' url="../index/index?city=广州" open-type="redirect" hover-class="other-navigator-hover">
         <image class='locateIcon' src='http://pic.caigoubao.cc/603511/location.png'></image>
         <!-- 颜色为#621016 -->
         <text class='locateText'>{{city}}</text>
@@ -24,9 +24,36 @@
     </view>
     <view class='wtrimgContainer'>
       <image class='wtrimg' src="{{wtrimg}}"></image>
+      <text class='wtrtxt' style='{{wtrAttr_1}}:{{wtrVal_1}}'>{{wtrtxt}}</text>
     </view>
+    <text class='temp'>{{temp}}°C</text>
+    
+    <view class='tdCon' style='bottom:{{bt}}px;top:{{tp}}px'>
+      <view >
+        <view class='barr'>
+           <view class='sqare' wx:for="{{bar1}}" wx:key="{{bar1.id}}"><view><text>{{item.id}}</text></view><view><text>{{item.val}}</text></view></view> 
+        </view>
+        <span style="flex-basis:15%"></span>
+        <view class='barr'>
+           <view class='sqare' wx:for="{{bar2}}" wx:key="{{bar2.id}}"><view><text>{{item.id}}</text></view><view><text>{{item.val}}</text></view></view> 
+        </view>
+      </view>
+    </view>
+    
   </view>
   <view class='infoList'>
-    <view class='list1'></view>
+    <scroll-view scroll-x class='list1 lists'>
+      <view wx:for="{{daily}}" wx:key="{{item.date}}" class='daily' >
+        <view class='left'>
+          <image src='{{item.url}}' style='width:150rpx;height:150rpx;'></image>
+          <text>{{item.date}}</text>
+        </view>
+        <view class='right'>
+          <text class='txt1'>{{item.text_day}}</text>
+          <text>{{item.low}}°C/{{item.high}}°C</text>
+          <text>风向：{{item.wind_direction}}</text>
+        </view> 
+      </view>
+    </scroll-view>
   </view>
 </view>

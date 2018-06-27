@@ -14,7 +14,6 @@ page{
   right: 0rpx;
   display: block;
   position: fixed;
-  background-image:url(http://pic.caigoubao.cc/603511/sunny.jpg);
   background-size:cover;
   background-color: #efefef;
   background-position:center;
@@ -23,9 +22,9 @@ page{
 }
 
 .topBar{
-  position: absolute;
+  position: relative;
   width: 100%;
-  top: 3%;
+  margin-top: 3%;
   justify-content: space-between;
   display: flex;
   align-items: center;
@@ -78,21 +77,37 @@ page{
   background-color: #fff;
   height: 20%;
   width: 100%;
-  box-shadow: 0rpx 5rpx 10rpx #555;
+  white-space:nowrap; 
+}
+
+.infoList>.lists{
+  box-shadow: 0rpx 0rpx 15rpx #555;
 }
 
 .wtrimgContainer{
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 25%;
-  background-color: rgba(0, 16, 22, .3);
-  border: 2px solid #222;
-  margin-left: 225rpx;
-  margin-right: 225rpx;
-  padding-top: 50rpx;
-  padding-bottom: 50rpx;
-  border-radius: 20%;
+  margin-top: 10%;
+  background-color: rgba(0, 16, 22, .15);
+  margin-left: 235rpx;
+  margin-right: 235rpx;
+  padding-top: 40rpx;
+  padding-bottom: 40rpx;
+  border-radius:40rpx;
+}
+
+.wtrimgContainer>.wtrtxt{
+  position: absolute;
+  width: 150rpx;
+  height: 40rpx;
+  font-family: dengxian;
+  font-size: 1rem;
+  background-color: #efefef;
+  padding: 15rpx;
+  border-radius: 10rpx;
+  line-height: 40rpx;
+  text-align: center;
 }
 
 .wtrimg{
@@ -100,32 +115,88 @@ page{
   height: 200rpx;
 }
 
+.temp{
+  display: block;
+  text-align: center;
+  margin-top: 50rpx;
+  color: #efefef;
+  font-size: 80rpx;
+  line-height: 80rpx;
+}
 
-
-
-
-
-
-
-.userinfo {
+.tdCon{
+  position: absolute;
+  width: 100%;
+  display: flex;
+}
+.tdCon>view{
+  margin:50rpx;
+  flex-basis:100%;
+  display:flex;
+  flex-direction:column;
+}
+.barr{
+  flex-basis: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.sqare{
+  height: 100%;
+  width: 30%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  background-color: rgba(0, 16, 22, .15);
+  border-radius: 10rpx;
+  font-size: .7em;
+  color: rgba(239,239,239,.85);
+  text-align: center;
+
+}
+.sqare>view{
+  flex-basis: 50%;
+  display: flex;
+  flex-direction: column;
+}
+.sqare>view>text{
+  flex-basis: 100%;
 }
 
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
+.daily{
+  margin-left: 7rpx;
+  margin-right: 7rpx;
+  width: 361rpx;
+  height: 100%;
+  border-left: 1px solid rgba(0, 16, 22, .8);
+  border-right: 1px solid rgba(0, 16, 22, .8);
+  font-size: .5em;
+  display: inline-flex;
+  justify-content: space-between;
+  
 }
 
-.userinfo-nickname {
-  color: #aaa;
+.daily>.left{
+  flex-direction: column;
+  display: flex;
+  margin-left: 5rpx;
 }
-
-.usermotto {
-  margin-top: 200px;
-  color: #a00;
+.daily>.left>image{
+  display: flex;
+  flex-basis: 100%;
+  margin-top: 20rpx;
 }
-
+.daily>.left>text{
+  display: flex;
+  flex-basis: 50%;
+}
+.daily>.right{
+  font-size: .8rem;
+  display: flex;
+  flex-direction: column;
+  margin-right: 10rpx;
+}
+.daily>.right>text{
+  margin-top: 20rpx;
+  flex-basis: 100%;
+  text-align: center;
+}
