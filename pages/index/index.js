@@ -90,6 +90,12 @@ const primary_pollutant={
   "":""
 }
 
+const lifePoint={
+  isCold: [{ src: "http://imagehosting.biz/images/2018/06/28/c1fec902b9e9adeb.png", txt: "宜穿短袖" }, { src: "http://imagehosting.biz/images/2018/06/28/8c5c270d1bbde9e5.png", txt: "宜穿长袖" }],
+  outAble: [{ src: "http://imagehosting.biz/images/2018/06/28/320928826d79cfda.png", txt: "宜出行" }, { src: "http://imagehosting.biz/images/2018/06/28/a173dc6b4fddc5fe.png", txt: "宜宅在家" }],
+  unbAble: [{ src: "http://imagehosting.biz/images/2018/06/28/-01.png", txt: "出门带伞" }, { src: "http://imagehosting.biz/images/2018/06/28/umbrella.png", txt: "出门不带伞" }]
+}
+
 Page({
   data: {
     /*motto: 'Hello World',
@@ -99,18 +105,41 @@ Page({
     city:" ",
     wtrtxt:" ",
     wtrimg:" ",
-    key: "galvrrn3fnjuv9lm"
+    key: "galvrrn3fnjuv9lm",
+    region: ['江苏省', '南京市', '浦口区']
   },
   
-  whatIsPrimaryPollutant:function(event){
+  whatIsPrimaryPollutant: function (event) {
     wx.showModal({
-      title:"主要污染物有什么",
-      content:"室外大气污染物主要包括：粉尘/可吸入颗粒物、二氧化硫、氮氧化合物、一氧化碳等。"
+      title: "主要污染物有什么",
+      content: "室外大气污染物主要包括：粉尘/可吸入颗粒物、二氧化硫、氮氧化合物、一氧化碳等。"
     })
   },
-
+  whatIsAqi: function (event) {
+    wx.showModal({
+      title: "空气污染指数什么",
+      content: "空气污染指数（aqi），是将常规监测的几种空气污染物浓度简化成为单一的概念性指数值形式，并分级表征空气污染程度和空气质量状况，适合于表示城市的短期空气质量状况和变化趋势。"
+    })
+  },
+  cityChanged:function(e){
+    //console.log(e.detail.value);
+    var thisCity = e.detail.value;
+    var city=e.detail.value[1];
+    var cityPre=this.data.city;
+    var region=e.detail.value;
+    if(!(e.detail.value[1].indexOf("市")+1)) city=e.detail.value[2];
+    this.setData({
+      city: city
+    })
+    if(cityPre!=city){
+      wx.redirectTo({
+        url: '../index/index?city='+this.data.city+"&region="+region,
+      })
+    }
+  },
   onLoad:function(options){
-    if (!options.city) { this.setData({ city: "乌鲁木齐" }) } else {this.setData({city: options.city})}
+    if (!options.city) { this.setData({ city: "南京市" }) } else { this.setData({ city: options.city }) }
+    if (options.region) { this.setData({ region: options.region.split(',') }) }
 
     /**获取手机系统，匹配样式，达到兼容 */
     var res = wx.getSystemInfoSync()
@@ -159,6 +188,31 @@ Page({
         barr2.push({ id: "风级", val: res.data.results[0].now["wind_scale"] });
         barr2.push({ id: "风向", val: res.data.results[0].now["wind_direction"] });
         //console.log(res.data.results[0].now);
+        var result=res.data.results[0].now;;
+        var lp11,lp12,lp21,lp22,lp31,lp32
+        if(result["temperature"]>20){
+          lp11 = lifePoint.isCold[0].src;
+          lp12 = lifePoint.isCold[0].txt;
+        }else{
+          lp11 = lifePoint.isCold[1].src;
+          lp12 = lifePoint.isCold[1].txt;
+        } 
+        
+        if ((result["text"].indexOf("阴") + 1) || (result["text"].indexOf("云") + 1)) {
+          lp21 = lifePoint.outAble[0].src;
+          lp22 = lifePoint.outAble[0].txt;
+        } else {
+          lp21 = lifePoint.outAble[1].src;
+          lp22 = lifePoint.outAble[1].txt;
+        } 
+        
+        if ((result["text"].indexOf("雨") + 1) || (result["text"].indexOf("雪") + 1)) {
+          lp31 = lifePoint.unbAble[0].src;
+          lp32 = lifePoint.unbAble[0].txt;
+        } else {
+          lp31 = lifePoint.unbAble[1].src;
+          lp32 = lifePoint.unbAble[1].txt;
+        }
         that.setData({
           today: res.data.results[0].now,
           wtrimg:wtrImgUrl[res.data.results[0].now["text"]],
@@ -166,7 +220,18 @@ Page({
           temp: res.data.results[0].now["temperature"],
           bg:wtrBg[res.data.results[0].now["text"]],
           bar1:barr1,
-          bar2:barr2
+          bar2:barr2,
+          lP1src: lp11,
+          lP1txt: lp12,
+          lP2src: lp21,
+          lP2txt: lp22,
+          lP3src: lp31,
+          lP3txt: lp32
+        })
+      },
+      fail: function () {
+        wx.showToast({
+          title: '接口调用失败'
         })
       }
     })
@@ -195,6 +260,11 @@ Page({
         that.setData({
           daily:res.data.results[0].daily
         })
+      },
+      fail: function () {
+        wx.showToast({
+          title: '接口调用失败'
+        })
       }
     })
     /**异步请求访问接口，获取当前城市当天空气质量 */
@@ -210,7 +280,7 @@ Page({
         'Content-Type': 'application/json'
       },
       success: function (res) {
-        console.log(res.data.results[0].air.city);
+        //console.log(res.data.results[0].air.city);
         var ifIsGood = "";
         if (!(res.data.results[0].air.city.quality.length - 1)) ifIsGood = "font-size:3.5em;";
         var primary_pollutant = res.data.results[0].air.city.primary_pollutant ;
@@ -220,6 +290,11 @@ Page({
           airQualClr: airSituationClr[res.data.results[0].air.city.quality],
           ifIsGood:ifIsGood,
           primary_pollutant: primary_pollutant
+        })
+      },
+      fail:function(){
+        wx.showToast({
+          title: '接口调用失败'
         })
       }
     })

@@ -13,14 +13,14 @@
 
   <view class='bg' style='background-image:url("{{bg}}")'>
     <view class='topBar'>
-      <navigator class='locate' url="../index/index?city=西安" open-type="redirect" hover-class="other-navigator-hover">
+      <picker class='locate'mode="region" bindchange="cityChanged" value="{{region}}">
         <image class='locateIcon' src='http://imagehosting.biz/images/2018/06/27/location.png'></image>
         <!-- 颜色为#621016 -->
         <text class='locateText'>{{city}}</text>
-      </navigator>
-      <navigator class='addIcon' url="../index/index?city=北京" open-type="redirect" hover-class="other-navigator-hover">
+      </picker>
+      <!-- <navigator class='addIcon' url="../index/index?city=北京" open-type="redirect" hover-class="other-navigator-hover">
         <image class='plsIcon' src='http://imagehosting.biz/images/2018/06/27/add.png'></image>
-      </navigator> 
+      </navigator>  -->
     </view>
     <view class='wtrimgContainer'>
       <image class='wtrimg' src="{{wtrimg}}"></image>
@@ -64,31 +64,43 @@
         <view class='list2_up_right'>
           <text class='airTitle'>污染物含量：</text>
           <view>
-            <text>一氧化碳</text>:<text>{{air.co}}</text>
+            <text>一氧化碳</text><text>{{air.co}}</text>
           </view>
           <view>
-            <text>二氧化氮</text>:<text>{{air.no2}}</text>
+            <text>二氧化氮</text><text>{{air.no2}}</text>
           </view>
           <view>
-            <text>臭氧</text>:<text>{{air.o3}}</text>
+            <text>臭氧</text><text>{{air.o3}}</text>
           </view>
           <view>
-            <text>PM10</text>:<text>{{air.pm10}}</text>
+            <text>PM10</text><text>{{air.pm10}}</text>
           </view>
           <view>
-            <text>PM2.5</text>:<text>{{air.pm25}}</text>
+            <text>PM2.5</text><text>{{air.pm25}}</text>
           </view>
           <view>
-            <text>二氧化硫</text>:<text>{{air.so2}}</text>
+            <text>二氧化硫</text><text>{{air.so2}}</text>
           </view>
         </view>
       </view>
       <view class='list2_down'>
         <view class='list2_down_side air_left' bindtap='whatIsPrimaryPollutant'><text class='airTitle'style='margin-left:0px;'>主要污染物</text><text></text>{{primary_pollutant}}</view>
-        <view class='list2_down_side'><text class='airTitle'style='margin-left:0px;'>空气污染指数</text><text>{{air.aqi}}</text></view>
+        <view class='list2_down_side'bindtap='whatIsAqi'><text class='airTitle'style='margin-left:0px;'>空气污染指数</text><text>{{air.aqi}}</text></view>
       </view>
     </view>
     <view class='list3 lists' style='margin-top:{{sp}}px;'>
+      <view class='list3_item'>
+        <image src='{{lP1src}}' class='list3_img'></image>
+        <text class='list3_title'>{{lP1txt}}</text>
+      </view>
+      <view class='list3_item'>
+        <image src='{{lP2src}}' class='list3_img'></image>
+        <text class='list3_title'>{{lP2txt}}</text>
+      </view>
+      <view class='list3_item'>
+        <image src='{{lP3src}}' class='list3_img'></image>
+        <text class='list3_title'>{{lP3txt}}</text>
+      </view>
     </view>
   </view>
 </view>

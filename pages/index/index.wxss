@@ -130,6 +130,26 @@ page{
 .infoList>.list3{
   height: 30%;
   width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.list3_item{
+  flex-basis: 33.3%;
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  justify-content: space-around;
+}
+.list3_img{
+  flex-basis: 70%;
+  width: 100%;
+}
+.list3_title{
+  flex-basis: 15%;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: lighter;
+
 }
 
 .infoList>.lists{
@@ -215,8 +235,9 @@ page{
   margin-right: 7rpx;
   width: 361rpx;
   height: 100%;
-  border-left: 1px solid rgba(0, 16, 22, .8);
-  border-right: 1px solid rgba(0, 16, 22, .8);
+  /* border-left: 1px solid rgba(0, 16, 22, .8);
+  border-right: 1px solid rgba(0, 16, 22, .8); */
+  background-color: #efefef;
   font-size: .5em;
   display: inline-flex;
   justify-content: space-between;
